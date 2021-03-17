@@ -1,11 +1,12 @@
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
 #define ROWS     4
 #define COLUMNS 4
 enum Move { MOVE_UP = 0, MOVE_DOWN = 1, MOVE_LEFT = 2, MOVE_RIGHT = 3 };
-int row;       
-int column;   
+int row;      
+int column;  
 int cells[ROWS][COLUMNS];
 const int shuffles = 100;
  
@@ -40,7 +41,7 @@ int gameover(void)
 {
     int i,j; int k = 1;
     for ( i = 0; i < ROWS; i++ )
-        for ( j = 0; j < COLUMNS; j++ ) 
+        for ( j = 0; j < COLUMNS; j++ )
             if ( (k < ROWS*COLUMNS) && (cells[i][j] != k++ ) )
                 return 0;
     return 1;        
@@ -64,7 +65,7 @@ void display()
                     printf("%2d\n",cells[i][j]);
                 }
             }
-                
+               
             else
             {
                 if(j != COLUMNS-1)
@@ -81,7 +82,7 @@ void display()
     putchar('\n');
 }
 
-enum Move Controller_getMove(void){
+enum Move getMove(void){
     int c;
     while(1)
     {
@@ -90,8 +91,8 @@ enum Move Controller_getMove(void){
         while( getchar() != '\n' );
         switch ( c )
         {
-            
-            case 'u' : return MOVE_UP;   
+           
+            case 'u' : return MOVE_UP;  
             case 'd' : return MOVE_DOWN;
             case 'l' : return MOVE_LEFT;
             case 'r' : return MOVE_RIGHT;
@@ -104,16 +105,16 @@ int main(void){
  
     srand((unsigned)time(NULL));
  
-    do 
+    do
     {
         initialise();
-        
+       
     }while ( gameover() );
  
     display();
-    while( !gameover() ){ 
-        movement( Controller_getMove() ); 
-        display(); 
+    while( !gameover() ){
+        movement( getMove() );
+        display();
     }
  
     printf("You win");
